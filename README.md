@@ -1,9 +1,7 @@
 # 🔍 CAPTCHA Processor
 
 <div align="center">
-  
-  ![CAPTCHA Processor Banner](https://via.placeholder.com/800x200/4361ee/ffffff?text=CAPTCHA+Processor)
-  
+    
   [![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
   [![Flask](https://img.shields.io/badge/flask-2.0.1-brightgreen.svg)](https://flask.palletsprojects.com/)
   [![OpenCV](https://img.shields.io/badge/opencv-4.5.3-orange.svg)](https://opencv.org/)

@@ -9,7 +9,7 @@
   [![OpenCV](https://img.shields.io/badge/opencv-4.5.3-orange.svg)](https://opencv.org/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   
-  **Công cụ tự động nhận dạng và giải mã CAPTCHA trong game Chú Bé Rồng Online. Dự án tích hợp hệ thống thu thập dữ liệu, xử lý ảnh, và mô hình CNN-LSTM được huấn luyện cho font chữ đặc thù của game. Giao diện web thân thiện giúp người dùng dễ dàng huấn luyện, cải thiện mô hình và tích hợp giải pháp vào game.**
+  **Ứng dụng xử lý và quản lý dữ liệu CAPTCHA cho mô hình học máy**
   
 </div>
 
@@ -65,8 +65,8 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/captcha-processor.git
-cd captcha-processor
+git clone https://github.com/duykhongphai/Dragonboy-Captcha-Ocr.git
+cd Dragonboy-Captcha-Ocr
 
 # Cài đặt thư viện yêu cầu
 pip install -r requirements.txt
@@ -222,6 +222,6 @@ Dự án này được phân phối dưới [Giấy phép MIT](https://opensourc
   
   🌟 **Đóng góp và phản hồi luôn được chào đón!** 🌟
   
-  [Báo cáo lỗi](https://github.com/yourusername/captcha-processor/issues) | [Đóng góp](https://github.com/yourusername/captcha-processor/pulls)
+  [Báo cáo lỗi](https://github.com/duykhongphai/Dragonboy-Captcha-Ocr/issues) | [Đóng góp](https://github.com/duykhongphai/Dragonboy-Captcha-Ocr/pulls)
   
 </div>

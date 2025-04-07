@@ -162,21 +162,23 @@ Kết quả sẽ hiển thị:
 ## 📁 Cấu trúc thư mục
 
 ```
-captcha-processor/
-├── app.py                 # File chính của ứng dụng
-├── text_recognition.py    # Script huấn luyện & nhận dạng
+captcha/
+├── app.py                 # File chính của ứng dụng Flask
+├── text_recognition.py    # Script huấn luyện & nhận dạng CAPTCHA
 ├── requirements.txt       # Danh sách thư viện yêu cầu
 ├── README.md              # File hướng dẫn này
-├── templates/             # Các template HTML
-│   ├── index.html         # Trang chủ
-│   ├── training.html      # Trang nhập dữ liệu
-│   ├── view_captcha.html  # Xem ảnh đã xử lý
-│   ├── view_unlabeled.html # Xem ảnh chưa xử lý
-│   └── import_result.html # Kết quả nhập ảnh
-├── static/                # File tĩnh (CSS, JS, hình ảnh)
-├── model.h5               # Mô hình đã huấn luyện
-├── unlabeled/             # Thư mục chứa ảnh chưa xử lý
-└── captcha_images/        # Thư mục chứa ảnh đã xử lý
+├── captcha_images/        # Thư mục chứa ảnh CAPTCHA đã xử lý
+├── captcha_model_output/  # Thư mục chứa output của mô hình
+│   ├── captcha_model_simple.h5  # Mô hình đã huấn luyện (phiên bản đơn giản)
+│   ├── char_mapping.json  # Mapping giữa ký tự và index
+│   └── evaluation_results.txt  # Kết quả đánh giá mô hình
+├── templates/             # Các template HTML cho ứng dụng web
+│   ├── index.html
+│   ├── training.html
+│   ├── view_captcha.html
+│   ├── view_unlabeled.html
+│   └── import_result.html
+└── unlabeled/             # Thư mục chứa ảnh chưa xử lý
 ```
 
 ## 💡 Xử lý sự cố

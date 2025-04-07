@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ảnh Chưa Xử Lý</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #4cc9f0;
+            --gray-dark: #2d3748;
+            --gray: #4a5568;
+            --gray-light: #e2e8f0;
+            --success: #48bb78;
+            --danger: #f56565;
+            --warning: #ed8936;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            --rounded: 8px;
+            --rounded-lg: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .logo-icon {
+            font-size: 1.5rem;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--rounded);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--gray-light);
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2rem 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .page-title {
+            color: var(--gray-dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .stats-card {
+            background-color: var(--white);
+            padding: 1.25rem;
+            border-radius: var(--rounded-lg);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .stats-content h2 {
+            color: var(--gray-dark);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-content p {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--rounded);
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: var(--white);
+        }
+        
+        .btn-danger:hover {
+            background-color: #e53e3e;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-light);
+            border-right: none;
+            border-radius: var(--rounded) 0 0 var(--rounded);
+            font-size: 0.875rem;
+            color: var(--gray);
+            background-color: var(--white);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            box-shadow: var(--shadow-inner);
+            border-color: var(--primary);
+        }
+        
+        .search-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 0 var(--rounded) var(--rounded) 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.25rem;
+        }
+        
+        .image-card {
+            background-color: var(--white);
+            border-radius: var(--rounded-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .image-container {
+            height: 180px;
+            overflow: hidden;
+            background-color: #f1f5f9;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-card:hover .image-preview {
+            transform: scale(1.05);
+        }
+        
+        .image-info {
+            padding: 1rem;
+        }
+        
+        .image-filename {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-dark);
+            margin-bottom: 0.75rem;
+            word-break: break-all;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 20;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            border-radius: var(--rounded-lg);
+            max-width: 90%;
+            max-height: 90%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--danger);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: var(--rounded);
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .no-results, .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background-color: var(--white);
+            border-radius: var(--rounded-lg);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .no-results h3, .empty-state h3 {
+            color: var(--gray-dark);
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        
+        .no-results p, .empty-state p {
+            color: var(--gray);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.25rem;
+            margin-top: 2rem;
+        }
+        
+        .pagination-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--gray-light);
+            background-color: var(--white);
+            color: var(--gray);
+            border-radius: var(--rounded);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-btn:hover:not(:disabled):not(.active) {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+        
+        .pagination-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 30;
+            display: none;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .nav {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .nav-link {
+                font-size: 0.875rem;
+                padding: 0.375rem 0.5rem;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .stats-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .image-container {
+                height: 150px;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⚙️</span>
+                    <span>CAPTCHA Processor</span>
+                </div>
+                <nav class="nav">
+                    <a href="/" class="nav-link">Trang Chủ</a>
+                    <a href="/view_unlabeled" class="nav-link active">Ảnh Chưa Xử Lý</a>
+                    <a href="/view_captcha_images" class="nav-link">Ảnh CAPTCHA</a>
+                    <a href="/process_next_image" class="nav-link">Tiếp Tục Xử Lý</a>
+                </nav>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Ảnh Chưa Xử Lý</h1>
+            </div>
+            
+            <div class="stats-card">
+                <div class="stats-content">
+                    <h2>Thống Kê</h2>
+                    <p>Số lượng ảnh chưa xử lý: <strong>{{ count }}</strong></p>
+                </div>
+                {% if count > 0 %}
+                <a href="/process_next_image" class="btn btn-primary">
+                    <span>Bắt Đầu Xử Lý</span>
+                </a>
+                {% endif %}
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" id="search-input" class="search-input" placeholder="Tìm kiếm theo tên file...">
+                <button id="search-button" class="search-btn">Tìm Kiếm</button>
+            </div>
+            
+            {% if count > 0 %}
+            <div class="gallery" id="unlabeled-gallery">
+                {% for image in images %}
+                <div class="image-card" data-filename="{{ image|lower }}">
+                    <div class="image-container">
+                        <img src="{{ url_for('serve_image', filename=image, type='original') }}" alt="{{ image }}" class="image-preview">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-filename">{{ image }}</div>
+                        <div class="card-actions">
+                            <a href="/process_next_image" class="btn btn-primary btn-sm">Xử Lý</a>
+                            <button class="btn btn-danger btn-sm delete-btn" data-filename="{{ image }}">Xóa</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div id="no-search-results" class="no-results" style="display: none;">
+                <h3>Không tìm thấy kết quả</h3>
+                <p>Không có ảnh nào phù hợp với từ khóa tìm kiếm của bạn.</p>
+            </div>
+            
+            {% if count > 24 %}
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be generated by JavaScript -->
+            </div>
+            {% endif %}
+            
+            {% else %}
+            <div class="empty-state">
+                <h3>Chưa có ảnh nào cần xử lý</h3>
+                <p>Để bắt đầu, hãy tải lên ảnh từ trang chủ hoặc thêm ảnh vào thư mục unlabeled.</p>
+                <a href="/" class="btn btn-primary">Quay Lại Trang Chủ</a>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+    
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-filename"></div>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="" class="modal-image" id="modal-img">
+                <div class="modal-actions">
+                    <a href="/process_next_image" class="btn btn-primary">Xử Lý</a>
+                    <button class="btn btn-danger delete-btn" id="modal-delete-btn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+    
+    <script>
+        // Global variables
+        const imagesPerPage = 24;
+        let currentPage = 1;
+        let allItems = document.querySelectorAll('.image-card');
+        let filteredItems = [...allItems];
+        
+        // Function to show loading overlay
+        function showLoading() {
+            document.getElementById('loading-overlay').style.display = 'flex';
+        }
+        
+        // Function to hide loading overlay
+        function hideLoading() {
+            document.getElementById('loading-overlay').style.display = 'none';
+        }
+        
+        // Image click to open modal
+        document.querySelectorAll('.image-container').forEach(container => {
+            container.addEventListener('click', function() {
+                const modal = document.getElementById('image-modal');
+                const modalImg = document.getElementById('modal-img');
+                const modalFilename = document.getElementById('modal-filename');
+                const parentItem = this.closest('.image-card');
+                const img = this.querySelector('img');
+                const filename = parentItem.querySelector('.image-filename').textContent;
+                const deleteBtn = document.getElementById('modal-delete-btn');
+                
+                modalImg.src = img.src;
+                modalFilename.textContent = filename;
+                deleteBtn.setAttribute('data-filename', filename);
+                modal.style.display = 'flex';
+            });
+        });
+        
+        // Close modal
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('image-modal').style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('image-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Delete functionality (would need to add a backend route for this)
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filename = this.getAttribute('data-filename');
+                if (confirm(`Bạn có chắc chắn muốn xóa ảnh "${filename}"?`)) {
+                    showLoading();
+                    // Here you would add AJAX call to a delete endpoint
+                    // For now, let's just simulate and reload the page
+                    setTimeout(() => {
+                        alert(`Đã xóa ảnh "${filename}". (Đây là giả lập, bạn cần thêm route xóa ảnh vào backend)`);
+                        hideLoading();
+                        // Reload page after delete
+                        // window.location.reload();
+                    }, 1000);
+                }
+            });
+        });
+        
+        // Modal delete button
+        document.getElementById('modal-delete-btn').addEventListener('click', function() {
+            const filename = this.getAttribute('data-filename');
+            if (confirm(`Bạn có chắc chắn muốn xóa ảnh "${filename}"?`)) {
+                showLoading();
+                // Here you would add AJAX call to a delete endpoint
+                // For now, let's just simulate and reload the page
+                setTimeout(() => {
+                    alert(`Đã xóa ảnh "${filename}". (Đây là giả lập, bạn cần thêm route xóa ảnh vào backend)`);
+                    hideLoading();
+                    document.getElementById('image-modal').style.display = 'none';
+                    // Reload page after delete
+                    // window.location.reload();
+                }, 1000);
+            }
+        });
+        
+        // Search functionality
+        document.getElementById('search-button').addEventListener('click', performSearch);
+        
+        document.getElementById('search-input').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            filteredItems = [...allItems].filter(item => {
+                const filename = item.getAttribute('data-filename');
+                return filename.includes(searchTerm);
+            });
+            
+            currentPage = 1;
+            updateGallery();
+            setupPagination();
+            
+            const noResultsElem = document.getElementById('no-search-results');
+            noResultsElem.style.display = filteredItems.length === 0 ? 'block' : 'none';
+        }
+        
+        // Pagination
+        function updateGallery() {
+            const startIndex = (currentPage - 1) * imagesPerPage;
+            const endIndex = startIndex + imagesPerPage;
+            const visibleItems = filteredItems.slice(startIndex, endIndex);
+            
+            allItems.forEach(item => {
+                item.style.display = 'none';
+            });
+            
+            visibleItems.forEach(item => {
+                item.style.display = 'flex';
+            });
+        }
+        
+        function setupPagination() {
+            const paginationElem = document.getElementById('pagination');
+            if (!paginationElem) return;
+            
+            const pageCount = Math.ceil(filteredItems.length / imagesPerPage);
+            if (pageCount <= 1) {
+                paginationElem.style.display = 'none';
+                return;
+            }
+            
+            paginationElem.style.display = 'flex';
+            paginationElem.innerHTML = '';
+            
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'pagination-btn';
+            prevBtn.innerHTML = '&laquo;';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateGallery();
+                    setupPagination();
+                }
+            });
+            paginationElem.appendChild(prevBtn);
+            
+            // Page buttons
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(pageCount, startPage + 4);
+            
+            if (endPage - startPage < 4 && startPage > 1) {
+                startPage = Math.max(1, endPage - 4);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'pagination-btn';
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    updateGallery();
+                    setupPagination();
+                });
+                paginationElem.appendChild(pageBtn);
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'pagination-btn';
+            nextBtn.innerHTML = '&raquo;';
+            nextBtn.disabled = currentPage === pageCount;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < pageCount) {
+                    currentPage++;
+                    updateGallery();
+                    setupPagination();
+                }
+            });
+            paginationElem.appendChild(nextBtn);
+        }
+        
+        // Initialize pagination if needed
+        if (allItems.length > imagesPerPage) {
+            setupPagination();
+            updateGallery();
+        }
+    </script>
+</body>
+</html>

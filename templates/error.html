@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lỗi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #e74c3c;
+        }
+        .error-icon {
+            font-size: 64px;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+        .message {
+            font-size: 18px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fdecea;
+            border-radius: 5px;
+            color: #c0392b;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            margin: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .btn-secondary {
+            background-color: #2196F3;
+        }
+        .btn-secondary:hover {
+            background-color: #0b7dda;
+        }
+        .options {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-icon">⚠️</div>
+        <h1>Đã xảy ra lỗi</h1>
+        
+        <div class="message">
+            {{ error }}
+        </div>
+        
+        <div class="options">
+            <a href="/" class="btn">Quay lại trang chủ</a>
+            <a href="/cleanup_database" class="btn btn-secondary">Dọn dẹp dữ liệu</a>
+        </div>
+    </div>
+</body>
+</html>
